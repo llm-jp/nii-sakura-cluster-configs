@@ -1,0 +1,10 @@
+---
+- name: Install DCGM Exporter
+  hosts: mdx_gpu
+  become: true
+  become_method: ansible.builtin.sudo
+  roles:
+    - role: gantsign.golang
+      golang_version: 1.22.3
+      golang_gopath: /opt/go
+    - role: dcgm_exporter

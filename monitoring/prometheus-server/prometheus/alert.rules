@@ -1,0 +1,21 @@
+groups:
+  - name: Instance Down
+    rules:
+      - alert: instance_down
+        expr: up == 0
+        for: 5m # Duration for which the condition must be true to trigger an alert.
+        labels:
+          severity: critical
+        annotations:
+          firing_text: "Instance {{ $labels.instance }} has been down for more than 5 minutes."
+          resolved_text: "Instance {{ $labels.instance }} has recovered."
+  - name: High Disk Usage
+    rules:
+      - alert: HighDiskUsage # > 90%
+        expr: 100 - ((node_filesystem_avail_bytes{mountpoint="/"} * 100) / node_filesystem_size_bytes{mountpoint="/"}) > 90
+        for: 1h
+        labels:
+          severity: critical
+        annotations:
+          firing_text: "Instance {{ $labels.instance }} used more than 90% of Disk"
+          resolved_text: "Instance {{ $labels.instance }} up"

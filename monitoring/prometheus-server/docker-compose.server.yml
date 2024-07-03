@@ -1,0 +1,54 @@
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    hostname: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - metrics_data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--web.enable-lifecycle"
+      - "--storage.tsdb.retention.time=30d" # ref: https://prometheus.io/docs/prometheus/latest/storage/
+    restart: always
+
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    hostname: grafana
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./grafana/grafana.env
+    volumes:
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - grafana_data:/var/lib/grafana
+    restart: always
+
+  alertmanager:
+    image: prom/alertmanager
+    container_name: alertmanager
+    hostname: alertmanager
+    volumes:
+      - ./alertmanager:/etc/alertmanager
+    command:
+      - "--config.file=/etc/alertmanager/config.yml"
+    ports:
+      - 9093:9093
+    restart: always
+
+volumes:
+  metrics_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${METRICS_DATA_PATH}
+      o: bind
+  grafana_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${GRAFANA_DATA_PATH}
+      o: bind

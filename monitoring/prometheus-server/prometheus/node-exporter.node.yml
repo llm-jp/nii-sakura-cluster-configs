@@ -1,0 +1,5 @@
+# TODO: Fill ip addresses later
+- targets:
+    - "x.x.x.x:9100"
+    - "x.x.x.x:9100"
+    ...

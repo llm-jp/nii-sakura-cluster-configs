@@ -1,0 +1,8 @@
+# Grafana config
+grafana/grafana.ini
+
+# alertmanager config
+alertmanager/config.yml
+
+# Environment file
+.env

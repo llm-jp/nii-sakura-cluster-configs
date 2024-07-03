@@ -1,0 +1,23 @@
+global:
+  slack_api_url: # fill slack web hook url
+
+route:
+  receiver: "default"
+  # Group alerts by alert name, instance name, and error level, considering them as the same type
+  group_by: ["alertname", "instance", "severity"]
+  # Time to wait before grouping the same type of alerts into one alert group
+  group_wait: 30s
+  # Time interval to wait before notifying again when the same type of alert occurs
+  group_interval: 5m
+  # Re-notify an alert every 10 minutes
+  repeat_interval: 10m
+
+receivers:
+  - name: "default"
+    slack_configs:
+      # Slack channel name
+      - channel: "#alert"
+        title: '{{ if eq .Status "firing" }}[FIRING]{{else}}[RESOLVED]{{end}} {{ .GroupLabels.alertname }}'
+        text: '{{ if eq .Status "firing" }}{{ .CommonAnnotations.firing_text }}{{else}}{{ .CommonAnnotations.resolved_text }}{{end}}'
+        # Notify when the alert is resolved
+        send_resolved: true

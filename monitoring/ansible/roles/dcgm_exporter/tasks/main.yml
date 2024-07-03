@@ -1,0 +1,105 @@
+---
+# FIXME: This playbook is for Ubuntu 22.04 only. Make this playbook applicable to Rocky Linux
+# FIXME: This playbook is not idempotent.
+- name: Install dependencies
+  ansible.builtin.apt:
+    name:
+      - git
+      - make
+    state: present
+
+- name: Check if CUDA keyring package is installed
+  ansible.builtin.command:
+    cmd: dpkg-query -W -f='${Status} ${Version}\n' cuda-keyring
+  register: cuda_keyring_check
+  failed_when: false
+
+- name: Download the CUDA keyring package
+  ansible.builtin.get_url:
+    url: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.0-1_all.deb
+    dest: /tmp/cuda-keyring_1.0-1_all.deb
+    mode: "0644"
+  when: "'install ok installed' not in cuda_keyring_check.stdout or '1.0-1' not in cuda_keyring_check.stdout"
+  register: cuda_keyring_download
+
+- name: Install the CUDA keyring package
+  ansible.builtin.apt:
+    deb: /tmp/cuda-keyring_1.0-1_all.deb
+    state: present
+  when: cuda_keyring_download.changed
+
+- name: Add the CUDA repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/cuda-archive-keyring.gpg] https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /"
+    state: present
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Install DCGM
+  ansible.builtin.apt:
+    name: datacenter-gpu-manager
+    state: present
+
+- name: Check if dcgm-exporter is already cloned
+  ansible.builtin.stat:
+    path: /opt/dcgm-exporter/.git
+  register: dcgm_exporter_git
+
+- name: Clone the dcgm-exporter repository
+  ansible.builtin.git:
+    repo: https://github.com/NVIDIA/dcgm-exporter.git
+    dest: /opt/dcgm-exporter
+    update: false
+  when: not dcgm_exporter_git.stat.exists
+
+- name: Compile dcgm-exporter binary
+  ansible.builtin.command:
+    cmd: make binary
+    chdir: /opt/dcgm-exporter
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/opt/go/1.22.3/bin"
+  args:
+    creates: /opt/dcgm-exporter/dcgm-exporter
+
+- name: Install dcgm-exporter binary
+  ansible.builtin.command:
+    cmd: make install
+    chdir: /opt/dcgm-exporter
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/opt/go/1.22.3/bin"
+  args:
+    creates: /usr/bin/dcgm-exporter
+
+- name: Copy dcgm-collectors.csv to target machine
+  ansible.builtin.copy:
+    src: dcgm-collectors.csv
+    dest: "{{ dcgm_exporter_collectors_csv }}"
+    mode: "0644"
+
+- name: Create systemd service file for dcgm-exporter
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/dcgm-exporter.service
+    content: |
+      [Unit]
+      Description=DCGM Exporter
+      After=network.target
+
+      [Service]
+      ExecStart=/usr/bin/dcgm-exporter -f {{ dcgm_exporter_collectors_csv }}
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
+    mode: "0644"
+
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Enable and start dcgm-exporter service
+  ansible.builtin.systemd:
+    name: dcgm-exporter
+    enabled: true
+    state: started

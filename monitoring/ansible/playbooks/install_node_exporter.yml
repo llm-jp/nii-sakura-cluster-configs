@@ -1,0 +1,68 @@
+---
+- name: Install Node Exporter
+  hosts: gpu_cluster_a, gpu_cluster_b
+  become: true
+  become_method: ansible.builtin.sudo
+  roles:
+    - role: prometheus.prometheus.node_exporter
+      node_exporter_enabled_collectors:
+        - cpu
+        - diskstats
+        - filesystem
+        - hwmon
+        - infiniband
+        - loadavg
+        - meminfo
+        - netstat
+        - nvme
+        - meminfo_numa
+      node_exporter_disabled_collectors:
+        # see: https://github.com/prometheus/node_exporter?tab=readme-ov-file#enabled-by-default
+        - btrfs
+        # - boottime # not for linux
+        - conntrack
+        # - cpu
+        - cpufreq
+        # - diskstats
+        - dmi
+        - edac
+        - entropy
+        # - exec # not for linux
+        - fibrechannel
+        - filefd
+        # - filesystem
+        # - hwmon
+        # - infiniband
+        - ipvs
+        # - loadavg
+        - mdadm
+        # - meminfo
+        - netclass
+        - netdev
+        # - netisr # not for linux
+        # - netstat
+        - nfs
+        - nfsd
+        # - nvme
+        - os
+        - powersupplyclass
+        - pressure
+        - rapl
+        - schedstat
+        - selinux
+        - sockstat
+        - softnet
+        - stat
+        - tapestats
+        - textfile
+        # - thermal # not for linux
+        - thermal_zone
+        - time
+        - timex
+        - udp_queues
+        - uname
+        - vmstat
+        # - watchdog # not for linux
+        - xfs
+        - zfs
+        - zoneinfo
