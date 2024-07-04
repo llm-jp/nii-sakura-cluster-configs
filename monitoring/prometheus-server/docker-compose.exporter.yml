@@ -1,0 +1,43 @@
+services:
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
+    command:
+      - "--path.rootfs=/host"
+      - "--collector.disable-defaults"
+      - "--collector.cpu"
+      - "--collector.diskstats"
+      - "--collector.filesystem"
+      - "--collector.hwmon"
+      - "--collector.infiniband"
+      - "--collector.loadavg"
+      - "--collector.meminfo"
+      - "--collector.netstat"
+      - "--collector.nvme"
+      - "--collector.meminfo_numa"
+    network_mode: host
+    pid: host
+    volumes:
+      - "/:/host:ro,rslave"
+    restart: unless-stopped
+
+  dcgm_exporter:
+    image: nvcr.io/nvidia/k8s/dcgm-exporter:3.3.6-3.4.2-ubuntu22.04
+    container_name: dcgm_exporter
+    hostname: dcgm_exporter
+    ports:
+      - "9400:9400"
+    volumes:
+      - ./prometheus:/etc/prometheus
+    command:
+      - "-f /etc/prometheus/dcgm-collectors.csv"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    restart: always
