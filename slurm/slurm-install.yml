@@ -1,0 +1,51 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    slurm_user: slurm
+    slurm_group: slurm
+
+  tasks:
+    - name: Ensure required packages are installed
+      apt:
+        name:
+          - slurm-wlm
+          - munge
+          - cpufrequtils
+          - libmunge-dev
+          - libmunge2
+        state: present
+        update_cache: yes
+      when: "'master-node' not in inventory_hostname"
+
+    - name: Create Munge Key
+      include_tasks: create-mungekey-sub.yml 
+
+    - name: Copy Munge Key
+      copy:
+        src: "/tmp/{{ lookup('env', 'USER') }}/ansible/munge.key"
+        dest: "/etc/munge/munge.key"
+    
+    - name: Copy Munge Key
+      ansible.builtin.file:
+        path: "/tmp/{{ lookup('env', 'USER') }}/ansible/munge.key"
+        state: absent
+      when: "'master-node' in inventory_hostname"
+    
+
+
+    - name: Distribute configuration files
+      include_tasks: distribute-config-files.yml 
+
+    - name: Ensure slurmd service is running
+      systemd:
+        name: slurmd
+        state: restarted
+        enabled: yes
+
+    - name: Ensure slurmctld service is running on master node
+      systemd:
+        name: slurmctld
+        state: restarted
+        enabled: yes
+      when: "'master-node' in inventory_hostname"

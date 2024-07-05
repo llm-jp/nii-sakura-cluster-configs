@@ -1,0 +1,33 @@
+---    
+- name: Create Munge Key
+  ansible.builtin.command: /usr/sbin/mungekey
+  args:
+    creates: /etc/munge/munge.key
+  when: "'master-node' in inventory_hostname"
+
+- name: Change Key Owner
+  ansible.builtin.file:
+    path: /etc/munge/munge.key
+    owner: munge
+    group: munge
+    mode: '0400'
+  when: "'master-node' in inventory_hostname"
+
+- name: Copy Munge Key to local repor
+  ansible.builtin.copy:
+    src: "/etc/munge/munge.key"
+    dest: "/tmp/{{ lookup('env', 'USER') }}/ansible/munge.key"
+    remote_src: yes
+  when: "'master-node' in inventory_hostname"
+
+- name: Ensure munge service is running
+  systemd:
+    name: munge
+    state: started
+    enabled: yes
+
+- name: Ensure munge service is restarted
+  systemd:
+    name: munge
+    state: restarted
+    enabled: yes

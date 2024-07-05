@@ -1,0 +1,59 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    slurm_user: slurm
+    slurm_group: slurm
+
+  tasks:
+    - name: Copy Slurm configuration files
+      copy:
+        src: "slurm_conf/slurm.conf"
+        dest: "/etc/slurm/slurm.conf"
+    
+    - name: Copy Host Files to Login
+      copy:
+        src: "slurm_conf/hosts_login"
+        dest: "/etc/hosts"
+      when: "'master-node' in inventory_hostname"
+    
+    - name: Copy Host Files to GPU Nodes
+      copy:
+        src: "slurm_conf/hosts_gpu"
+        dest: "/etc/hosts"
+      when: "'gpu-node' in inventory_hostname"
+    
+    - name: Copy Prolog files
+      copy:
+        src: "slurm_conf/prolog.sh"
+        dest: "/etc/slurm/prolog.sh"
+        owner: slurm
+        group: slurm
+        mode: 755
+    
+    - name: Copy Gres files
+      copy:
+        src: "slurm_conf/gres.conf"
+        dest: "/etc/slurm/gres.conf"
+        owner: slurm
+        group: slurm
+        mode: 644
+      when: "'gpu-node' in inventory_hostname"
+
+    - name: Copy cgroup configuration files
+      copy:
+        src: "slurm_conf/cgroup.conf"
+        dest: "/etc/slurm/cgroup.conf"
+
+    - name: Ensure slurmd service is running
+      systemd:
+        name: slurmd
+        state: restarted
+        enabled: yes
+
+    - name: Ensure slurmctld service is running on master node
+      systemd:
+        name: slurmctld
+        state: restarted
+        enabled: yes
+      when: "'master-node' in inventory_hostname"
