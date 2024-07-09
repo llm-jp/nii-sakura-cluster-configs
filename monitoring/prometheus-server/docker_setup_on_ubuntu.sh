@@ -1,4 +1,3 @@
-# FIXME: This script is for Ubuntu 22.04 LTS, not for Rocky Linux
 # Add Docker's official GPG key:
 sudo apt-get update
 sudo apt-get install ca-certificates curl
