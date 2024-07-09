@@ -1,0 +1,52 @@
+NCCL TESTS: 1 GPU per node with 4 nodes
+======= All to All =======
+# nThread 1 nGpus 1 minBytes 536870912 maxBytes 536870912 step: 2(factor) warmup iters: 20 iters: 100 agg iters: 1 validation: 1 graph: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 313655 on       a003 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  1 Group  0 Pid 312853 on       a004 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  2 Group  0 Pid 310717 on       a005 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  3 Group  0 Pid 309342 on       a006 device  0 [0x18] NVIDIA H100 80GB HBM3
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)       
+   536870912      33554432     float    none      -1   9319.6   57.61   43.21      0   9344.0   57.46   43.09    N/A
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 43.1486 
+#
+
+======= All Reduce =======
+# nThread 1 nGpus 1 minBytes 536870912 maxBytes 536870912 step: 2(factor) warmup iters: 20 iters: 100 agg iters: 1 validation: 1 graph: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 313711 on       a003 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  1 Group  0 Pid 312910 on       a004 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  2 Group  0 Pid 310772 on       a005 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  3 Group  0 Pid 309397 on       a006 device  0 [0x18] NVIDIA H100 80GB HBM3
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)       
+   536870912     134217728     float     sum      -1    16798   31.96   47.94      0    16822   31.91   47.87      0
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 47.9056 
+#
+
+======= All Gather =======
+# nThread 1 nGpus 1 minBytes 536870912 maxBytes 536870912 step: 2(factor) warmup iters: 20 iters: 100 agg iters: 1 validation: 1 graph: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 313766 on       a003 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  1 Group  0 Pid 312963 on       a004 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  2 Group  0 Pid 310825 on       a005 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  3 Group  0 Pid 309449 on       a006 device  0 [0x18] NVIDIA H100 80GB HBM3
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)       
+   536870912      33554432     float    none      -1   8785.5   61.11   45.83      0   8629.8   62.21   46.66      0
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 46.2451 
+#
+

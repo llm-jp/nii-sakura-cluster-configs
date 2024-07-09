@@ -15,6 +15,7 @@ export UCX_IB_GPU_DIRECT_RDMA=1
 
 # NCCL settings
 export NCCL_IB_ADDR_RANGE="10.1.0.0/16,10.2.0.0/16,10.3.0.0/16,10.4.0.0/16"
+# export NCCL_IB_GID_INDEX=3  # For RoCE v2
 export NCCL_IB_HCA="mlx5_0:1,mlx5_1:1,mlx5_4:1,mlx5_5:1"
 export NCCL_IB_PCI_RELAXED_ORDERING=1
 
