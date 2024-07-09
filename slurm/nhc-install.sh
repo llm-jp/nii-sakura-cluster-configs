@@ -4,6 +4,6 @@ wget https://github.com/mej/nhc/releases/download/$VER/lbnl-nhc-$VER.tar.xz -O /
 cd /opt/nhc
 tar -xvf lbnl-nhc.tar.xz
 cd lbnl-nhc-$VER
-./configure --prefix=/usr --sysconfdir=/etc --libexecdir=/usr/libexec
+./configure --prefix=/opt/nhc --sysconfdir=/etc --libexecdir=/usr/libexec
 make test
 make install

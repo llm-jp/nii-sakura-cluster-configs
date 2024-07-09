@@ -1,39 +1,53 @@
 ---    
 - name: Copy Slurm configuration files
   copy:
-    src: "slurm_conf/slurm.conf"
+    src: "sakura_conf/slurm.conf"
     dest: "/etc/slurm/slurm.conf"
-
-- name: Copy Host Files to Login
-  copy:
-    src: "slurm_conf/hosts_login"
-    dest: "/etc/hosts"
-  when: "'master-node' in inventory_hostname"
-
-- name: Copy Host Files to GPU Nodes
-  copy:
-    src: "slurm_conf/hosts_gpu"
-    dest: "/etc/hosts"
-  when: "'gpu-node' in inventory_hostname"
+    owner: root
+    group: root
+    # mode: 644
 
 - name: Copy Prolog files
   copy:
-    src: "slurm_conf/prolog.sh"
+    src: "sakura_conf/prolog.sh"
     dest: "/etc/slurm/prolog.sh"
+    owner: slurm
+    group: slurm
+    mode: 755
+
+- name: Copy Epilog files
+  copy:
+    src: "sakura_conf/epilog.sh"
+    dest: "/etc/slurm/epilog.sh"
     owner: slurm
     group: slurm
     mode: 755
 
 - name: Copy Gres files
   copy:
-    src: "slurm_conf/gres.conf"
+    src: "sakura_conf/gres.conf"
     dest: "/etc/slurm/gres.conf"
     owner: slurm
     group: slurm
     mode: 644
-  when: "'gpu-node' in inventory_hostname"
+  when: "'a0' in inventory_hostname"
 
 - name: Copy cgroup configuration files
   copy:
-    src: "slurm_conf/cgroup.conf"
+    src: "sakura_conf/cgroup.conf"
     dest: "/etc/slurm/cgroup.conf"
+
+- name: Ensure /var/log/slurm is slurm-rw-able 
+  ansible.builtin.file:
+    path: "/var/log/slurm"
+    state: directory
+    owner: slurm
+    group: slurm
+
+- name: copy nhc config
+  copy:
+    src: "sakura_conf/nhc.conf"
+    dest: "/etc/nhc/nhc.conf"
+    owner: root
+    group: root
+    mode: 644

@@ -6,34 +6,61 @@
     slurm_group: slurm
 
   tasks:
-    - name: Ensure required packages are installed
-      apt:
-        name:
-          - slurm-wlm
-          - munge
-          - cpufrequtils
-          - libmunge-dev
-          - libmunge2
+    - name: Ensure the group exists
+      group:
+        name: slurm
         state: present
-        update_cache: yes
+        gid: 500
+
+    - name: Create Slurm User
+      user:
+        name: slurm
+        uid: 500
+        group: slurm
+        shell: /usr/sbin/nologin  # Sets the shell to nologin to prevent direct login
+        create_home: no
+        system: yes  # Set to yes
+
+    - name: Ensure required packages are installed (Compute)
+      yum:
+        name:
+          - epel-release
+          - mariadb-server
+          - mariadb
+          - munge
+          - munge-libs
+          - munge-devel
+          - slurm
+          - slurm-slurmd
       when: "'master-node' not in inventory_hostname"
+    
+    - name: Ensure required packages are installed (Control)
+      yum:
+        name:
+          - epel-release
+          - mariadb-server
+          - mariadb
+          - munge
+          - munge-libs
+          - munge-devel
+          - slurm
+          - slurm-slurmctld
+      when: "'master-node' in inventory_hostname"
 
     - name: Create Munge Key
       include_tasks: create-mungekey-sub.yml 
 
-    - name: Copy Munge Key
-      copy:
-        src: "/tmp/{{ lookup('env', 'USER') }}/ansible/munge.key"
-        dest: "/etc/munge/munge.key"
+    # - name: Copy Munge Key
+    #   copy:
+    #     src: "/tmp/{{ lookup('env', 'USER') }}/ansible/munge.key"
+    #     dest: "/etc/munge/munge.key"
     
-    - name: Copy Munge Key
-      ansible.builtin.file:
-        path: "/tmp/{{ lookup('env', 'USER') }}/ansible/munge.key"
-        state: absent
-      when: "'master-node' in inventory_hostname"
+    # - name: Copy Munge Key
+    #   ansible.builtin.file:
+    #     path: "/tmp/{{ lookup('env', 'USER') }}/ansible/munge.key"
+    #     state: absent
+    #   when: "'master-node' in inventory_hostname"
     
-
-
     - name: Distribute configuration files
       include_tasks: distribute-config-files.yml 
 
@@ -42,6 +69,7 @@
         name: slurmd
         state: restarted
         enabled: yes
+      when: "'master-node' not in inventory_hostname"
 
     - name: Ensure slurmctld service is running on master node
       systemd:

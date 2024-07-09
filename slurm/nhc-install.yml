@@ -7,23 +7,34 @@
 
   tasks:
     - name: Ensure required packages are installed
-      apt:
+      yum:
         name:
           - automake
         state: present
         update_cache: yes
+
+    - name: Ensure /opt/nhc exists
+      ansible.builtin.file:
+        path: "/opt/nhc"
+        state: directory
+        owner: "root"
+        group: "root"
+    
     - name: copy installation script
       copy:
-        src: "sakura_conf/nhc-install.sh"
-        dest: "/opt/nhc-install.sh"
+        src: "nhc-install.sh"
+        dest: "/opt/nhc/nhc-install.sh"
         owner: root
         group: root
         mode: 744
+
     - name: execute nhc script
-      ansible.builtin.shell: /opt/nhc-install.sh
+      ansible.builtin.shell: /opt/nhc/nhc-install.sh
+
+
     - name: copy nhc config
       copy:
-        src: "nhc.conf"
+        src: "sakura_conf/nhc.conf"
         dest: "/etc/nhc/nhc.conf"
         owner: root
         group: root
