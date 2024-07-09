@@ -25,6 +25,7 @@ services:
     volumes:
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
       - grafana_data:/var/lib/grafana
+    user: "${USER_ID:0}"
     restart: always
 
   alertmanager:
