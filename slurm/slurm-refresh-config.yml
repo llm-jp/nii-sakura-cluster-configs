@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    slurm_user: slurm
+    slurm_group: slurm
+
+  tasks:
+    - name: Distribute configuration files
+      include_tasks: distribute-config-files.yml
+
+    - name: Ensure slurmd service is running
+      systemd:
+        name: slurmd
+        state: restarted
+        enabled: yes
+      when: "'master-node' not in inventory_hostname"
+
+    - name: Ensure slurmctld service is running on master node
+      systemd:
+        name: slurmctld
+        state: restarted
+        enabled: yes
+      when: "'master-node' in inventory_hostname"

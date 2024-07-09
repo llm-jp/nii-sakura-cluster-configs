@@ -1,0 +1,12 @@
+- hosts: all
+  become: yes
+  vars:
+    slurm_user: slurm
+    slurm_group: slurm
+
+  tasks:
+    - name: Restart slurmd 
+      service:
+        name: slurmd
+        state: restarted
+
