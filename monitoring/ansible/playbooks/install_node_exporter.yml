@@ -61,7 +61,7 @@
         - time
         - timex
         - udp_queues
-        - uname
+        # - uname # necessary for grafana node exporter full
         - vmstat
         # - watchdog # not for linux
         - xfs
