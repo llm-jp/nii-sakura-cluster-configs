@@ -1,0 +1,136 @@
+NCCL TESTS: 1 GPU per node with 32 nodes
+======= All to All =======
+# nThread 1 nGpus 1 minBytes 536870912 maxBytes 536870912 step: 2(factor) warmup iters: 20 iters: 100 agg iters: 1 validation: 1 graph: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 341252 on       a001 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  1 Group  0 Pid 315524 on       a002 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  2 Group  0 Pid 314057 on       a003 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  3 Group  0 Pid 313203 on       a004 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  4 Group  0 Pid 311064 on       a005 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  5 Group  0 Pid 309697 on       a006 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  6 Group  0 Pid 310385 on       a007 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  7 Group  0 Pid 308780 on       a008 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  8 Group  0 Pid 305638 on       a009 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  9 Group  0 Pid 305691 on       a010 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 10 Group  0 Pid 528176 on       a011 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 11 Group  0 Pid 317447 on       a012 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 12 Group  0 Pid 304825 on       a013 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 13 Group  0 Pid 304317 on       a014 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 14 Group  0 Pid 304027 on       a015 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 15 Group  0 Pid 305861 on       a016 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 16 Group  0 Pid 309710 on       a017 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 17 Group  0 Pid 306512 on       a018 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 18 Group  0 Pid 508423 on       a019 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 19 Group  0 Pid 304537 on       a020 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 20 Group  0 Pid 303427 on       a021 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 21 Group  0 Pid 304929 on       a022 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 22 Group  0 Pid 312953 on       a023 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 23 Group  0 Pid 304255 on       a024 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 24 Group  0 Pid 302107 on       a025 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 25 Group  0 Pid 301667 on       a026 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 26 Group  0 Pid 301645 on       a027 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 27 Group  0 Pid 301674 on       a028 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 28 Group  0 Pid 301324 on       a029 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 29 Group  0 Pid 303998 on       a030 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 30 Group  0 Pid 301214 on       a031 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 31 Group  0 Pid 299712 on       a032 device  0 [0x18] NVIDIA H100 80GB HBM3
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)       
+   536870912       4194304     float    none      -1    11744   45.72   44.29      0    11751   45.69   44.26    N/A
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 44.273 
+#
+
+======= All Reduce =======
+# nThread 1 nGpus 1 minBytes 536870912 maxBytes 536870912 step: 2(factor) warmup iters: 20 iters: 100 agg iters: 1 validation: 1 graph: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 341332 on       a001 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  1 Group  0 Pid 315584 on       a002 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  2 Group  0 Pid 314122 on       a003 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  3 Group  0 Pid 313253 on       a004 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  4 Group  0 Pid 311115 on       a005 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  5 Group  0 Pid 309747 on       a006 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  6 Group  0 Pid 310436 on       a007 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  7 Group  0 Pid 308834 on       a008 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  8 Group  0 Pid 305688 on       a009 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  9 Group  0 Pid 305743 on       a010 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 10 Group  0 Pid 528244 on       a011 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 11 Group  0 Pid 317498 on       a012 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 12 Group  0 Pid 304875 on       a013 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 13 Group  0 Pid 304368 on       a014 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 14 Group  0 Pid 304078 on       a015 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 15 Group  0 Pid 305913 on       a016 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 16 Group  0 Pid 309764 on       a017 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 17 Group  0 Pid 306563 on       a018 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 18 Group  0 Pid 508490 on       a019 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 19 Group  0 Pid 304587 on       a020 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 20 Group  0 Pid 303479 on       a021 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 21 Group  0 Pid 304980 on       a022 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 22 Group  0 Pid 313003 on       a023 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 23 Group  0 Pid 304305 on       a024 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 24 Group  0 Pid 302159 on       a025 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 25 Group  0 Pid 301720 on       a026 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 26 Group  0 Pid 301708 on       a027 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 27 Group  0 Pid 301725 on       a028 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 28 Group  0 Pid 301375 on       a029 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 29 Group  0 Pid 304050 on       a030 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 30 Group  0 Pid 301269 on       a031 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 31 Group  0 Pid 299765 on       a032 device  0 [0x18] NVIDIA H100 80GB HBM3
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)       
+   536870912     134217728     float     sum      -1    21535   24.93   48.30      0    21537   24.93   48.30      0
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 48.3006 
+#
+
+======= All Gather =======
+# nThread 1 nGpus 1 minBytes 536870912 maxBytes 536870912 step: 2(factor) warmup iters: 20 iters: 100 agg iters: 1 validation: 1 graph: 0
+#
+# Using devices
+#  Rank  0 Group  0 Pid 341414 on       a001 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  1 Group  0 Pid 315644 on       a002 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  2 Group  0 Pid 314191 on       a003 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  3 Group  0 Pid 313306 on       a004 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  4 Group  0 Pid 311169 on       a005 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  5 Group  0 Pid 309801 on       a006 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  6 Group  0 Pid 310489 on       a007 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  7 Group  0 Pid 308887 on       a008 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  8 Group  0 Pid 305744 on       a009 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank  9 Group  0 Pid 305795 on       a010 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 10 Group  0 Pid 528311 on       a011 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 11 Group  0 Pid 317551 on       a012 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 12 Group  0 Pid 304929 on       a013 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 13 Group  0 Pid 304421 on       a014 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 14 Group  0 Pid 304130 on       a015 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 15 Group  0 Pid 305965 on       a016 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 16 Group  0 Pid 309817 on       a017 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 17 Group  0 Pid 306618 on       a018 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 18 Group  0 Pid 508556 on       a019 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 19 Group  0 Pid 304640 on       a020 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 20 Group  0 Pid 303531 on       a021 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 21 Group  0 Pid 305032 on       a022 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 22 Group  0 Pid 313056 on       a023 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 23 Group  0 Pid 304359 on       a024 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 24 Group  0 Pid 302213 on       a025 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 25 Group  0 Pid 301774 on       a026 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 26 Group  0 Pid 301775 on       a027 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 27 Group  0 Pid 301778 on       a028 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 28 Group  0 Pid 301429 on       a029 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 29 Group  0 Pid 304104 on       a030 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 30 Group  0 Pid 301324 on       a031 device  0 [0x18] NVIDIA H100 80GB HBM3
+#  Rank 31 Group  0 Pid 299819 on       a032 device  0 [0x18] NVIDIA H100 80GB HBM3
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)       
+   536870912       4194304     float    none      -1    10888   49.31   47.77      0    10861   49.43   47.89      0
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 47.8277 
+#
+

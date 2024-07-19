@@ -21,8 +21,13 @@ To setup the slurm, we need to install the followings
 
 To this end, we run the following ansible playbook.
 ```
-ansible-playbook -i inventory nhc-install.yml -K
-ansible-playbook -i inventory slurm-install.yml -K
+ansible-playbook -i inventory nhc-install.yml 
+ansible-playbook -i inventory slurm-install.yml 
 ```
+### Update configurations
+There are three scripts to update configurations
+- `slurm-refresh-config.yml`: to update all configurations related to the slurm service
+- `slurm-refresh-munge.yml`: to update munge key
+
 
 

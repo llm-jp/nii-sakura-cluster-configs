@@ -37,3 +37,5 @@ ansible-playbook playbooks/install_node_exporter.yml
 # dry run with verbose
 ansible-playbook site.yml --check --diff -vvv
 ```
+
+- `OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES` is necessary if you are a mac user

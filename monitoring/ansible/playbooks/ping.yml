@@ -1,0 +1,7 @@
+---
+- name: Ping
+  hosts: gpu_cluster_a
+  become: true
+  tasks:
+    - name: Ping
+      ansible.builtin.ping:

@@ -5,8 +5,8 @@ DCGM_FI_DEV_MEMORY_TEMP, gauge, Memory temperature (in C).
 DCGM_FI_DEV_GPU_TEMP,    gauge, GPU temperature (in C).
 DCGM_FI_DEV_POWER_USAGE,              gauge, Power draw (in W).
 DCGM_FI_DEV_TOTAL_ENERGY_CONSUMPTION, counter, Total energy consumption since boot (in mJ).
-DCGM_FI_DEV_PCIE_TX_THROUGHPUT,  counter, Total number of bytes transmitted through PCIe TX (in KB) via NVML.
-DCGM_FI_DEV_PCIE_RX_THROUGHPUT,  counter, Total number of bytes received through PCIe RX (in KB) via NVML.
+DCGM_FI_PROF_PCIE_TX_BYTES,  counter, Total number of bytes transmitted through PCIe TX (in KB) via NVML.
+DCGM_FI_PROF_PCIE_RX_BYTES,  counter, Total number of bytes received through PCIe RX (in KB) via NVML.
 DCGM_FI_DEV_PCIE_REPLAY_COUNTER, counter, Total number of PCIe retries.
 DCGM_FI_DEV_GPU_UTIL,      gauge, GPU utilization (in %).
 DCGM_FI_DEV_MEM_COPY_UTIL, gauge, Memory utilization (in %).
@@ -34,6 +34,10 @@ DCGM_FI_DEV_NVLINK_CRC_DATA_ERROR_COUNT_TOTAL, counter, Total number of NVLink d
 DCGM_FI_DEV_NVLINK_REPLAY_ERROR_COUNT_TOTAL,   counter, Total number of NVLink retries.
 DCGM_FI_DEV_NVLINK_RECOVERY_ERROR_COUNT_TOTAL, counter, Total number of NVLink recovery errors.
 DCGM_FI_DEV_NVLINK_BANDWIDTH_TOTAL,            counter, Total number of NVLink bandwidth counters for all lanes
+DCGM_FI_DEV_NVSWITCH_THROUGHPUT_TX, counter, Total number of bytes transmitted through NVSwitch TX
+DCGM_FI_DEV_NVSWITCH_THROUGHPUT_RX, counter, Total number of bytes received through NVSwitch RX
+DCGM_FI_PROF_NVLINK_TX_BYTES, counter, Total number of bytes transmitted through NVLink TX (in bytes)
+DCGM_FI_PROF_NVLINK_RX_BYTES, counter, Total number of bytes received through NVLink RX (in bytes)
 DCGM_FI_DEV_VGPU_LICENSE_STATUS, gauge, vGPU License status
 DCGM_FI_DEV_UNCORRECTABLE_REMAPPED_ROWS, counter, Number of remapped rows for uncorrectable errors
 DCGM_FI_DEV_CORRECTABLE_REMAPPED_ROWS,   counter, Number of remapped rows for correctable errors

@@ -1,13 +1,8 @@
-# TODO: Fill out the inventory file with the appropriate values
 [gpu_cluster_a]
-a-gpu-node0
-a-gpu-node1
-...
+a[001:033]-gw
 
 [gpu_cluster_b]
-b-gpu-node0
-b-gpu-node1
-...
+b[001:065]-gw
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
