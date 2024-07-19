@@ -1,0 +1,69 @@
+---
+- name: Add CUDNN_PATH to existing modulefiles
+  hosts:
+    - login_nodes
+    - gpu_cluster_a
+  become: true
+  become_user: root
+  tasks:
+    - name: Ensure modulefile directory exists
+      ansible.builtin.file:
+        path: /usr/local/modulefiles/cudnn
+        state: directory
+        mode: "0755"
+
+    - name: Create or update the cudnn modulefile for cuDNN 9.1.0
+      ansible.builtin.copy:
+        dest: /usr/local/modulefiles/cudnn/9.2.0
+        mode: "0755"
+        content: |
+          #%Module1.0#####################################################################
+          ##
+          ## module-git modulefile
+          ##
+          proc ModulesHelp { } {
+              puts stderr "\tThis module will set up an alias for easy anonymous"
+              puts stderr "\tcheck-out last version of the Modules package"
+              puts stderr "\tget-modules   - retrieve last version of modules sources"
+          }
+
+          module-whatis   "cudnn-9.2.0"
+
+          set             version                 9.2.0
+          set             modroot                 /usr/local/cudnn/$version
+          setenv          MODULESHOME             $modroot
+          setenv          CUDNN_PATH              $modroot
+
+          prepend-path    LD_LIBRARY_PATH         $modroot/lib
+          prepend-path    LIBRARY_PATH            $modroot/lib
+          prepend-path    CPATH                   $modroot/include
+
+          conflict        cudnn
+
+    - name: Create or update the cudnn modulefile for cuDNN 8.9.7
+      ansible.builtin.copy:
+        dest: /usr/local/modulefiles/cudnn/8.9.7
+        mode: "0755"
+        content: |
+          #%Module1.0#####################################################################
+          ##
+          ## module-git modulefile
+          ##
+          proc ModulesHelp { } {
+              puts stderr "\tThis module will set up an alias for easy anonymous"
+              puts stderr "\tcheck-out last version of the Modules package"
+              puts stderr "\tget-modules   - retrieve last version of modules sources"
+          }
+
+          module-whatis   "cudnn-8.9.7"
+
+          set             version                 8.9.7
+          set             modroot                 /usr/local/cudnn/$version
+          setenv          MODULESHOME             $modroot
+          setenv          CUDNN_PATH              $modroot
+
+          prepend-path    LD_LIBRARY_PATH         $modroot/lib
+          prepend-path    LIBRARY_PATH            $modroot/lib
+          prepend-path    CPATH                   $modroot/include
+
+          conflict        cudnn
