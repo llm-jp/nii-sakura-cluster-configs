@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -l
 
 module load cuda/12.5 nccl/2.22.3 hpcx/2.17.1-gcc-cuda12/hpcx
 
@@ -20,5 +20,14 @@ export NCCL_IB_ADDR_RANGE="10.1.0.0/16,10.2.0.0/16,10.3.0.0/16,10.4.0.0/16"
 export NCCL_IB_HCA="mlx5_0:1,mlx5_1:1,mlx5_4:1,mlx5_5:1"
 export NCCL_IB_PCI_RELAXED_ORDERING=1
 
+export NVLOG_CONFIG_FILE="nvlog.config"
+
 # execute the command
-"$@"
+nsys profile \
+    -t cuda,nvtx,ucx,mpi \
+    --stats=true \
+    --force-overwrite=true \
+    -o "nsys-prof-$(hostname).qdrep" \
+    --gpu-metrics-set=gh100 \
+    --gpu-metrics-device=all \
+    "$@"
