@@ -8,7 +8,7 @@ fio によるストレージベンチマークの実行方法について説明�
 
 ### `/home` 高速ファイルシステムへのアクセス
 
-| Run | Sequential Read (MB/s) | Sequential Write (MB/s) | Random Read (MB/s) | Random Write (MB/s) |
+| Run | Sequential Write (MB/s) | Sequential Read (MB/s) | Random Write (MB/s) | Random Read (MB/s) |
 | --- | ---------------------- | ----------------------- | ------------------ | ------------------- |
 | 1   | 3569                   | 7308                    | 2689               | 5268                |
 | 2   | 3441                   | 6996                    | 2544               | 5347                |
@@ -16,7 +16,7 @@ fio によるストレージベンチマークの実行方法について説明�
 
 ### `/data` データ用ファイルシステムへのアクセス
 
-| Run | Sequential Read (MB/s) | Sequential Write (KB/s) | Random Read (KB/s) | Random Write |
+| Run | Sequential Write (MB/s) | Sequential Read (KB/s) | Random Write (KB/s) | Random Read |
 | --- | ---------------------- | ----------------------- | ------------------ | ------------ |
 | 1   | 129                    | 44.3                    | 13.2               | 356 (MB/s)   |
 | 2   | 129                    | 64.8                    | 149                | 194 (KB/s)   |
