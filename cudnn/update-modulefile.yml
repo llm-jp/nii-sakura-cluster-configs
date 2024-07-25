@@ -1,5 +1,5 @@
 ---
-- name: Add CUDNN_PATH to existing modulefiles
+- name: Add some environment variable settings to existing modulefiles
   hosts:
     - login_nodes
     - gpu_cluster_a
