@@ -1,0 +1,23 @@
+---
+- name: Add some environment variable settings to existing NCCL modulefiles
+  hosts:
+    - login_nodes
+    - gpu_cluster_a
+    - gpu_cluster_b
+  become: true
+  become_user: root
+  tasks:
+    - name: Ensure modulefile directory exists
+      ansible.builtin.file:
+        path: /usr/local/modulefiles/nccl
+        state: directory
+        mode: "0755" # rwxr-xr-x
+
+    - name: Create or update the cudnn modulefile for NCCLs
+      ansible.builtin.template:
+        src: templates/nccl_modulefile.j2
+        dest: /usr/local/modulefiles/nccl/{{ item.nccl_version }}
+        mode: "0644" # rw-r--r--
+      with_items:
+        - { nccl_version: "2.22.3" }
+        - { nccl_version: "2.20.5" }
