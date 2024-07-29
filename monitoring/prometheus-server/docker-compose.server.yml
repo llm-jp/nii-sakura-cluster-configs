@@ -11,7 +11,7 @@ services:
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--web.enable-lifecycle"
-      - "--storage.tsdb.retention.time=30d" # ref: https://prometheus.io/docs/prometheus/latest/storage/
+      - "--storage.tsdb.retention.time=60d" # ref: https://prometheus.io/docs/prometheus/latest/storage/
     restart: always
 
   grafana:
