@@ -1,8 +1,8 @@
 [gpu_cluster_a]
-a[001:033]-gw
+a[001:065]-gw
 
 [gpu_cluster_b]
-b[001:065]-gw
+b[001:035]-gw
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
