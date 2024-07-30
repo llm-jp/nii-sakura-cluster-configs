@@ -4,6 +4,7 @@
     - login_nodes
     - gpu_cluster_a
     - gpu_cluster_b
+    - cpu
   become: true
   become_user: root
   tasks:
