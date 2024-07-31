@@ -1,0 +1,24 @@
+---
+- name: Add some environment variable settings to existing modulefiles
+  hosts:
+    - login_nodes
+    - gpu_cluster_a
+    - gpu_cluster_b
+    - cpu
+  become: true
+  become_user: root
+  tasks:
+    - name: Ensure modulefile directory exists
+      ansible.builtin.file:
+        path: /usr/local/modulefiles/cudnn
+        state: directory
+        mode: "0755" # rwxr-xr-x
+
+    - name: Create or update the cudnn modulefile for cuDNNs
+      ansible.builtin.template:
+        src: templates/cudnn_modulefile.j2
+        dest: /usr/local/modulefiles/cudnn/{{ item.cudnn_version }}
+        mode: "0644" # rw-r--r--
+      with_items:
+        - { cudnn_version: "9.2.0" }
+        - { cudnn_version: "8.9.7" }
