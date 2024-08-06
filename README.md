@@ -73,3 +73,16 @@ CPATH=/usr/local/nccl/2.22.3/include
 cd cudnn # or nccl
 ansible-playbook -i hosts.ini --timeout=120 update-modulefile.yml
 ```
+
+### 手動更新の履歴
+
+#### `/home/shared`の作成
+
+チェックポイントの書き出しなどジョブの作業用ディレクトリとして `/home/shared` を作成した。
+ディレクトリのパーミッションは、777に加えて、Sticky Bitをたてる
+
+```console
+$ sudo -s
+# mkdir /home/shared
+# chmod 1777 /home/shared
+```
