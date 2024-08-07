@@ -1,3 +1,8 @@
 roles/gantsign.golang/*
 ssh.cfg
 utm.inventory
+
+# This file is a binary
+# To get this binary, refer to the following link:
+# * https://github.com/koshieguchi/sakura-exporter
+roles/infiniband_exporter/files/infiniband-exporter

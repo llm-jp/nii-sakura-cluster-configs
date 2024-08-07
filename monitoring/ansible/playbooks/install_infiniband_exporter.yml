@@ -1,0 +1,7 @@
+---
+- name: Install DCGM Exporter
+  hosts: gpu_cluster_a, gpu_cluster_b
+  become: true
+  become_method: ansible.builtin.sudo
+  roles:
+    - role: infiniband_exporter

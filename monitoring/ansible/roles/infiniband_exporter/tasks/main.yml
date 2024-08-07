@@ -1,0 +1,33 @@
+---
+- name: Copy infiniband-exporter binary to /usr/bin
+  ansible.builtin.copy:
+    src: infiniband-exporter
+    dest: /usr/bin/infiniband-exporter
+    mode: "0755"
+
+- name: Create systemd service file for infiniband-exporter
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/infiniband-exporter.service
+    content: |
+      [Unit]
+      Description=Infiniband Exporter
+      Documentaion=https://github.com/koshieguchi/sakura-exporter
+      After=network.target
+
+      [Service]
+      ExecStart=/usr/bin/infiniband-exporter
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
+    mode: "0644"
+
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Enable and start infiniband-exporter service
+  ansible.builtin.systemd:
+    name: infiniband-exporter
+    enabled: true
+    state: started
