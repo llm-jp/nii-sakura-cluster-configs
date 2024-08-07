@@ -30,3 +30,8 @@ scrape_configs:
     file_sd_configs:
       - files:
           - /etc/prometheus/dcgm-exporter.node.yml
+  - job_name: infiniband_exporter
+    metrics_path: /metrics
+    file_sd_configs:
+      - files:
+          - /etc/prometheus/infiniband-exporter.node.yml
