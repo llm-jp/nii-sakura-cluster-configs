@@ -47,19 +47,12 @@
           - slurm-slurmctld
       when: "'master-node' in inventory_hostname"
 
+    - name: Ensure package 240719
+      include_tasks: system-package-240719.yml 
+
     - name: Create Munge Key
       include_tasks: create-mungekey-sub.yml 
 
-    # - name: Copy Munge Key
-    #   copy:
-    #     src: "/tmp/{{ lookup('env', 'USER') }}/ansible/munge.key"
-    #     dest: "/etc/munge/munge.key"
-    
-    # - name: Copy Munge Key
-    #   ansible.builtin.file:
-    #     path: "/tmp/{{ lookup('env', 'USER') }}/ansible/munge.key"
-    #     state: absent
-    #   when: "'master-node' in inventory_hostname"
     
     - name: Distribute configuration files
       include_tasks: distribute-config-files.yml 
