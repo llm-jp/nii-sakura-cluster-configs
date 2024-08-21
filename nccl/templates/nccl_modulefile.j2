@@ -1,0 +1,28 @@
+#%Module1.0#####################################################################
+##
+## module-git modulefile
+##
+proc ModulesHelp { } {
+    puts stderr "\tThis module will set up an alias for easy anonymous"
+    puts stderr "\tcheck-out last version of the Modules package"
+    puts stderr "\tget-modules   - retrieve last version of modules sources"
+}
+
+module-whatis   "nccl-{{ item.nccl_version }}"
+
+set             version                 {{ item.nccl_version }}
+set             modroot                 /usr/local/nccl/$version
+setenv          MODULESHOME             $modroot
+
+setenv          NCCL_VERSION            $version
+
+setenv          NCCL_HOME               $modroot
+setenv          NCCL_ROOT               $modroot
+
+prepend-path    LD_LIBRARY_PATH         $modroot/lib
+prepend-path    LIBRARY_PATH            $modroot/lib
+prepend-path    CPATH                   $modroot/include
+prepend-path    PKG_CONFIG_PATH         $modroot/lib/pkgconfig
+
+
+conflict        nccl

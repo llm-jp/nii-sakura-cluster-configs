@@ -1,0 +1,33 @@
+#%Module1.0#####################################################################
+##
+## module-git modulefile
+##
+proc ModulesHelp { } {
+    puts stderr "\tThis module will set up an alias for easy anonymous"
+    puts stderr "\tcheck-out last version of the Modules package"
+    puts stderr "\tget-modules   - retrieve last version of modules sources"
+}
+
+module-whatis   "cudnn-{{ item.cudnn_version }}"
+
+set             version                 {{ item.cudnn_version }}
+set             modroot                 /usr/local/cudnn/$version
+setenv          MODULESHOME             $modroot
+
+setenv          CUDNN_VERSION           $version
+
+setenv          CUDNN_PATH              $modroot
+setenv          CUDNN_HOME              $modroot
+setenv          CUDNN_ROOT              $modroot
+setenv          CUDNN_ROOT_DIR          $modroot
+
+setenv          CUDNN_INCLUDE_DIR       $modroot/include
+setenv          CUDNN_LIBRARY           $modroot/lib
+setenv          CUDNN_LIBRARY_DIR       $modroot/lib
+
+
+prepend-path    LD_LIBRARY_PATH         $modroot/lib
+prepend-path    LIBRARY_PATH            $modroot/lib
+prepend-path    CPATH                   $modroot/include
+
+conflict        cudnn

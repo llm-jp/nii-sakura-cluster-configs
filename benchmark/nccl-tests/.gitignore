@@ -1,3 +1,9 @@
 build/
 *.err
 *.out
+
+# Nsight Systems
+*.qdrep
+*.sqlite
+*.nsys-rep
+*.qdstrm
