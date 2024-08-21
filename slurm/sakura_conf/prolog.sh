@@ -4,7 +4,7 @@
 LOGFILE="/data/logs/slurm/log-$(hostname).log"
 
 # Log the start time
-echo "Job $SLURM_JOBID starting at $(date)" >> $LOGFILE
+echo "Job $SLURM_JOBID from $SLURM_JOB_USER starting at $(date)" >> $LOGFILE
 
 # Example setup tasks
 # Load necessary modules or perform any other setup

@@ -25,7 +25,7 @@ LOGFILE="/data/logs/slurm/log-$(hostname).log"
 
 
 # Log successful setup
-echo "Task $SLURM_JOBID finished at $(date)" >> $LOGFILE
+echo "Task $SLURM_JOBID from $SLURM_JOB_USER finished at $(date)" >> $LOGFILE
 
 # Exit successfully
 exit 0
