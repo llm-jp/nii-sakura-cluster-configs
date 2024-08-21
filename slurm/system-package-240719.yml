@@ -1,20 +1,13 @@
 ---
-- hosts: all
-  become: yes
-  vars:
-    slurm_user: slurm
-    slurm_group: slurm
+- name: Ensure packages for libffi-related 
+  yum:
+    name:
+      - epel-release
+      - cmake
+      - libffi-devel
+      - readline-devel
+      - libffi-devel
+      - ncurses-devel
+      - sqlite-devel
+      - bzip2-devel
 
-  tasks:
-    - name: Ensure required packages are installed (Compute)
-      yum:
-        name:
-          - epel-release
-          - cmake
-          - libffi-devel
-          - readline-devel
-          - libffi-devel
-          - ncurses-devel
-          - sqlite-devel
-          - bzip2-devel
-    

@@ -1,0 +1,7 @@
+---
+- name: Ensure packages for git-lfs
+  yum:
+    name:
+      - epel-release
+      - git-lfs
+      

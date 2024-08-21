@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    slurm_user: slurm
+    slurm_group: slurm
+
+  tasks:
+    - name: Ensure git-lfs
+      include_tasks: system-package-240820.yml
+    
+    - name: Ensure libffi
+      include_tasks: system-package-240719.yml
