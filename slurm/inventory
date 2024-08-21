@@ -5,10 +5,12 @@ master-node ansible_host=login001
 login002
 
 [gpu-nodes]
-a0[01:33]# ansible_host=gpu-node[0:15]
+a0[01:65]
+b0[01:35]
+
 
 [cpu-nodes]
-c00[1:4]# ansible_host=cpu-node[0:3]
+c0[01:10]# ansible_host=cpu-node[0:3]
 
 [all:vars]
 ansible_user=llm-jp-admin
