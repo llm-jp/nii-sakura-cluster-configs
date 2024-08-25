@@ -1,0 +1,49 @@
+---
+- hosts: all
+  tasks:
+#  # For test
+#  - name: Copy mock_dmesg.txt to the remote /tmp directory
+#    copy: src={{ item.src }} dest={{ item.dest }}
+#    with_items:
+#      - { src: files/mock_dmesg.txt, dest: /tmp/mock_dmesg.txt }
+#      - { src: files/mock_nvidia-smi_ecc.txt, dest: /tmp/mock_nvidia-smi_ecc.txt }
+#
+#  # For test
+#  - name: Read the contents of /tmp/mock_dmesg.txt
+#    command: cat /tmp/mock_dmesg.txt
+#    register: dmesg_log
+#
+#  # For test
+#  - name: Read the contents of /tmp/mock_nvidia-smi_ecc.txt
+#    command: cat /tmp/mock_nvidia-smi_ecc.txt
+#    register: ecc_log
+
+  - name: Run dmesg and register the output within the last 4 hours
+    command: dmesg -T --since '4 hour ago'
+    register: dmesg_log
+
+  - name: Run nvida-smi and register the output (ECC check only)
+    #command: nvidia-smi --query-gpu='ecc.errors.uncorrected.volatile.total,ecc.errors.corrected.volatile.total,ecc.errors.corrected.aggregate.total,ecc.errors.uncorrected.aggregate.total' --format=csv
+    #command: nvidia-smi --query-gpu='ecc.errors.uncorrected.volatile.total,ecc.errors.corrected.volatile.total,' --format=csv,noheader
+    command: nvidia-smi --query-gpu='ecc.errors.uncorrected.volatile.total' --format=csv,noheader
+    register: ecc_log
+
+  - name: Fail if any GPU ECC errors found in dmesg
+#    ignore_errors: yes
+    fail:
+      msg: "GPU ECC errors found in dmesg"
+    when: item is search("Xid .* An uncorrectable ECC error detected")
+    loop: "{{ dmesg_log.stdout_lines }}"
+
+#  - name: Fail if any GPU ECC errors found in nvidia-smi
+#    fail:
+#      msg: "GPU ECC errors found in nvidia-smi"
+#    when: "'0' not in item"
+#    loop: "{{ ecc_log.stdout_lines }}"
+
+  - name: Fail if any NetIF down event found in dmesg
+#    ignore_errors: yes
+    fail:
+      msg: "NetIF down event found"
+    when: item is search("mlx5_core .* Link down")
+    loop: "{{ dmesg_log.stdout_lines }}"

@@ -1,0 +1,21 @@
+[    0.000000] Linux version 5.14.0-427.22.1.el9_4.x86_64 (mockbuild@iad1-prod-build001.bld.equ.rockylinux.org) (gcc (GCC) 11.4.1 20231218 (Red Hat 11.4.1-3), GNU ld version 2.35.2-43.el9) #1 SMP PREEMPT_DYNAMIC Wed Jun 19 17:35:04 UTC 2024
+[    0.000000] The list of certified hardware and cloud instances for Enterprise Linux 9 can be viewed at the Red Hat Ecosystem Catalog, https://catalog.redhat.com.
+[    0.000000] Command line: BOOT_IMAGE=(hd0,gpt2)/vmlinuz-5.14.0-427.22.1.el9_4.x86_64 root=UUID=4c4654f2-dd1a-45e6-9558-32bc5f18de06 ro selinux=0 intel_idle.max_cstate=0 intel_pstate=disable processor.max_cstate=0 processor_idle.max_cstate=0 idle=poll numa_balancing=disable intel_iommu=off iommu=off transparent_hugepage=madvise scsi_mod.use_blk_mq=1 nosoftlockup mce=ignore_ce pcie_aspm=off crashkernel=1G-4G:192M,4G-64G:256M,64G-:512M resume=UUID=bbca5c21-d58b-4aa0-a985-af295c28d534 rhgb quiet
+[    0.000000] x86/tme: not enabled by BIOS
+[    0.000000] x86/split lock detection: #AC: crashing the kernel on kernel split_locks and warning on user-space split_locks
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x020: 'AVX-512 opmask'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x040: 'AVX-512 Hi256'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x080: 'AVX-512 ZMM_Hi256'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x200: 'Protection Keys User registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x400: 'PASID state'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x20000: 'AMX Tile config'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x40000: 'AMX Tile data'
+....
+[1925750.896548] mlx5_core 0000:19:00.0 enp25s0np0: Link down
+[1925763.796010] mlx5_core 0000:19:00.0 enp25s0np0: Link up
+[1925793.097074] mlx5_core 0000:19:00.0 enp25s0np0: Link down
+[1925816.147976] mlx5_core 0000:19:00.0 enp25s0np0: Link up
+....
