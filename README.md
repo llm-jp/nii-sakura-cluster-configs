@@ -7,6 +7,7 @@
 - `slurm/`: Slurm環境構築用Ansibleスクリプト等
 - `cudnn/`: cuDNN modulefileの更新用スクリプト
 - `nccl/`: NCCL modulefileの更新用スクリプト
+- `health-check/`: 故障マシンの検出
 
 ### `benchmark/`
 
@@ -18,6 +19,10 @@
 ### `monitoring/`
 
 ### `slurm/`
+
+### `health-check/`
+
+- health-checkの[README.md](./health-check/)を参照
 
 ### `cudnn/` and `nccl/`
 
