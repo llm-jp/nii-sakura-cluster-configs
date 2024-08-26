@@ -1,0 +1,17 @@
+---
+- name: Install packages
+  hosts:
+    - login_nodes
+    - gpu_cluster_a
+    - gpu_cluster_b
+    - cpu
+  become: true
+  become_user: root
+  tasks:
+    - name: Run install packages command
+      ansible.builtin.dnf:
+        name:                   # add packages here
+          - emacs-nox
+        state: present
+        update_cache: yes
+
