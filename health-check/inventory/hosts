@@ -1,12 +1,13 @@
 [gpu_cluster_a]
-a[001:065]
+a[001:065]-gw
 
 [gpu_cluster_b]
-b[001:035]
+b[001:035]-gw
+#b023
 
 #[cpu]
-#c[001:004]
+#c[001:004]-gw
 #
 #[login_nodes]
-#login[001:002]
+#login[001:002]-gw
 #
