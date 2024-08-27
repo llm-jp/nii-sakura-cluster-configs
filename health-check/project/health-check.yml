@@ -17,20 +17,46 @@
 #  - name: Read the contents of /tmp/mock_nvidia-smi_ecc.txt
 #    command: cat /tmp/mock_nvidia-smi_ecc.txt
 #    register: ecc_log
+#
 
   - name: Run dmesg and register the output within the last 4 hours
     command: dmesg -T --since '4 hour ago'
     register: dmesg_log
 
-  - name: Fail if any GPU ECC errors found in dmesg
-#    ignore_errors: yes
+  # Xid 13
+  - name: (Xid 13) Graphics Engine Exception
+    ignore_errors: yes
     fail:
-      msg: "GPU ECC errors found in dmesg"
-    when: item is search("Xid .* An uncorrectable ECC error detected")
+      msg: "GPU error: Graphics Engine Exception"
+    when: item is search("Xid .* 13, pid=")
+    loop: "{{ dmesg_log.stdout_lines }}"
+
+  # Xid 48
+  - name: (Xid 48) Double Bit ECC Error
+    ignore_errors: yes
+    fail:
+      msg: "GPU error: Double Bit ECC Error"
+    when: item is search("Xid .* 48, pid=")
+    loop: "{{ dmesg_log.stdout_lines }}"
+
+  # Xid 63
+  - name: (Xid 63) ECC page retirement or row remapping recording event
+    ignore_errors: yes
+    fail:
+      msg: "GPU error: ECC page retirement or row remapping recording event"
+    when: item is search("Xid .* 63, pid=")
+    loop: "{{ dmesg_log.stdout_lines }}"
+
+  # Xid 94
+  - name: (Xid 94) Contained ECC error
+    ignore_errors: yes
+    fail:
+      msg: "GPU error: Contained ECC error"
+    when: item is search("Xid .* 94, pid=")
     loop: "{{ dmesg_log.stdout_lines }}"
 
   - name: Fail if any NetIF down event found in dmesg
-#    ignore_errors: yes
+    ignore_errors: yes
     fail:
       msg: "NetIF down event found"
     when: item is search("mlx5_core .* Link down")
