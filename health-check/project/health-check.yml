@@ -47,6 +47,14 @@
     when: item is search("Xid .* 63, pid=")
     loop: "{{ dmesg_log.stdout_lines }}"
 
+  # Xid 79
+  - name: (Xid 79) GPU has fallen off the bus
+    ignore_errors: yes
+    fail:
+      msg: "GPU error: GPU has fallen off the bus"
+    when: item is search("Xid .* 79, pid=")
+    loop: "{{ dmesg_log.stdout_lines }}"
+
   # Xid 94
   - name: (Xid 94) Contained ECC error
     ignore_errors: yes
