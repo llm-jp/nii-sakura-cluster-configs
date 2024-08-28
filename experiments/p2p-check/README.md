@@ -1,6 +1,9 @@
 # 再現方法
 
-https://drive.google.com/drive/folders/1hv4M0Zalq-3c9QDwxIiCDULkpdWi_iWV?usp=drive_link
+[0] 何のためのフォルダか
+
+* Sakura 環境でノード間 GPU Direct 通信が一部の GPU間でしか出来ない問題の再現スクリプト
+* 参考: https://drive.google.com/drive/folders/1hv4M0Zalq-3c9QDwxIiCDULkpdWi_iWV?usp=drive_link
 
 [1] https://github.com/llm-jp/scripts を clone
 
