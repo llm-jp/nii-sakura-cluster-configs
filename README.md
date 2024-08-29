@@ -8,10 +8,11 @@
 - `cudnn/`: cuDNN modulefileの更新用スクリプト
 - `nccl/`: NCCL modulefileの更新用スクリプト
 - `health-check/`: 故障マシンの検出
+- `experiments/`: 性能計測のための実験用スクリプト
 
 ### `benchmark/`
 
-- `nccl-tests/` 
+- `nccl-tests/`
   - [NVIDIA/nccl-tests](https://github.com/NVIDIA/nccl-tests)を利用したネットワークのベンチマーク
 - `fio/`
   - [fio](https://fio.readthedocs.io/en/latest/fio_doc.html)を利用したストレージベンチマーク
@@ -33,7 +34,7 @@
 #### cuDNN modulefile の変更内容
 
 ```console
-$ module load cudnn/8.9.7 
+$ module load cudnn/8.9.7
 $ printenv | grep -i cudnn
 CUDNN_LIBRARY=/usr/local/cudnn/8.9.7/lib           # 追加
 PWD=/home/llm-jp-admin/sosuke/nii-sakura-cluster-configs/cudnn
@@ -56,7 +57,7 @@ CPATH=/usr/local/cudnn/8.9.7/include
 #### NCCL modulefile の変更内容
 
 ```console
-$ module load nccl/2.22.3 
+$ module load nccl/2.22.3
 $ printenv | grep -i nccl
 __MODULES_LMALTNAME=nccl/2.22.3&as|nccl/default&as|nccl/latest
 PKG_CONFIG_PATH=/usr/local/nccl/2.22.3/lib/pkgconfig
