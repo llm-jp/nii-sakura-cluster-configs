@@ -23,6 +23,30 @@
     group: slurm
     mode: 755
 
+- name: Copy GPU Monitoring files
+  copy:
+    src: "sakura_conf/nv_gpu_monitor.sh"
+    dest: "/etc/slurm/nv_gpu_monitor.sh"
+    owner: slurm
+    group: slurm
+    mode: 755
+
+- name: Copy NHC config
+  copy:
+    src: "sakura_conf/nhc.conf"
+    dest: "/etc/nhc/nhc.conf"
+    owner: root
+    group: root
+    mode: 644
+
+- name: Copy Reboot program
+  copy:
+    src: "sakura_conf/reboot_program.sh"
+    dest: "/etc/slurm/reboot_program.sh"
+    owner: slurm
+    group: slurm
+    mode: 755
+
 - name: Copy Gres files
   copy:
     src: "sakura_conf/gres.conf"
@@ -53,10 +77,3 @@
     owner: slurm
     group: slurm
 
-- name: copy nhc config
-  copy:
-    src: "sakura_conf/nhc.conf"
-    dest: "/etc/nhc/nhc.conf"
-    owner: root
-    group: root
-    mode: 644
