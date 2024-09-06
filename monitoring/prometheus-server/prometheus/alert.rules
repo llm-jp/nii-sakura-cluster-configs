@@ -19,3 +19,16 @@ groups:
         annotations:
           firing_text: "Instance {{ $labels.instance }} used more than 90% of Disk"
           resolved_text: "Instance {{ $labels.instance }} up"
+  - name: ECC counter
+    rules:
+      - alert: ecc_counter_increases
+        expr: increase(DCGM_FI_DEV_ECC_DBE_VOL_TOTAL[5m]) > 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "ECC Double-bit Error on GPU {{ $labels.gpu }} ({{ $labels.UUID }})"
+          description: "ECC Double-bit error has been detected on GPU {{ $labels.gpu }} (UUID: {{ $labels.UUID }}) in instance {{ $labels.Hostname }}."
+          firing_text: "Instance {{ $labels.Hostname }}: GPU {{ $labels.gpu }} (UUID: {{ $labels.UUID }}) has an increase in double-bit ECC errors."
+          resolved_text: "The ECC double-bit error issue on GPU {{ $labels.gpu }} (UUID: {{ $labels.UUID }}) in instance {{ $labels.Hostname }} has been resolved."
+
