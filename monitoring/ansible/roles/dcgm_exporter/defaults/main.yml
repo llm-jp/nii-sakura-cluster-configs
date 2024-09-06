@@ -1,1 +1,1 @@
-dcgm_exporter_collectors_csv: /tmp/dcgm-collectors.csv
+dcgm_exporter_collectors_csv: /var/lib/dcgm-exporter/dcgm-collectors.csv

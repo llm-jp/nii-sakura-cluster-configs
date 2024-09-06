@@ -1,6 +1,6 @@
 ---
 - name: Ping
-  hosts: gpu_cluster_a
+  hosts: gpu_cluster_a, gpu_cluster_b
   become: true
   tasks:
     - name: Ping

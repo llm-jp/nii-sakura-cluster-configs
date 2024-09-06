@@ -66,6 +66,12 @@
   args:
     creates: /usr/bin/dcgm-exporter
 
+- name: Create /var/lib/dcgm-exporter directory
+  ansible.builtin.file:
+    path: /var/lib/dcgm-exporter
+    state: directory
+    mode: "0755"
+
 - name: Copy dcgm-collectors.csv to target machine
   ansible.builtin.copy:
     src: dcgm-collectors.csv
@@ -78,6 +84,7 @@
     content: |
       [Unit]
       Description=DCGM Exporter
+      Documentation=https://github.com/NVIDIA/dcgm-exporter
       After=network.target
 
       [Service]

@@ -1,7 +1,6 @@
 ---
 - name: Install Node Exporter
-  # hosts: gpu_cluster_a, gpu_cluster_b
-  hosts: gpu_cluster_a
+  hosts: gpu_cluster_a, gpu_cluster_b
   become: true
   become_method: ansible.builtin.sudo
   roles:
