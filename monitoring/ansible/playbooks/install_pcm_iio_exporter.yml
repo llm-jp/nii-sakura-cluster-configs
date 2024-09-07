@@ -1,7 +1,7 @@
 ---
-- name: Install Infiniband Exporter
+- name: Install PCM IIO Exporter
   hosts: gpu_cluster_a, gpu_cluster_b
   become: true
   become_method: ansible.builtin.sudo
   roles:
-    - role: infiniband_exporter
+    - role: pcm_iio_exporter
