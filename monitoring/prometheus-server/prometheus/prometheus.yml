@@ -35,3 +35,8 @@ scrape_configs:
     file_sd_configs:
       - files:
           - /etc/prometheus/infiniband-exporter.node.yml
+  - job_name: pcm_iio_exporter
+    metrics_path: /metrics
+    file_sd_configs:
+      - files:
+          - /etc/prometheus/pcm-iio-exporter.node.yml
