@@ -1,5 +1,5 @@
 [gpu_cluster_a]
-a[066:070]-gw
+a[001:070]-gw
 
 [gpu_cluster_b]
 b[001:030]-gw
