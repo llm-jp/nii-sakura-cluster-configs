@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - name: set gpu power limit
+      ansible.builtin.command: nvidia-smi -pl 700
+      when: "'a0' in inventory_hostname"
+
+    - name: Add a cron job to set GPU power limit at reboot
+      cron:
+        name: "Set GPU power limit"
+        user: root
+        special_time: reboot
+        job: "nvidia-smi -pl 600"
+        state: absent
+      when: "'a0' in inventory_hostname"
+
+    - name: check if power limit is in place
+      ansible.builtin.command: bash -c "if [ \"$(nvidia-smi --query-gpu=index,power.limit --format=csv | head -n 2 | tail -n1)\" = \"0, 700.00 W\" ]; then echo \"$(hostname)\:\ Power limit set to 700W\"; else echo \"$(hostname)\:\ ERROR!\:\ Power limit is $(nvidia-smi --query-gpu=power.limit --format=csv | head -n 2 | tail -n1)\";exit -1; fi"
+      register: output
+      when: "'a0' in inventory_hostname"
+
+
+    
+

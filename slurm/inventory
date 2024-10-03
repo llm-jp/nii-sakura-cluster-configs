@@ -5,8 +5,8 @@ master-node ansible_host=login001
 login002
 
 [gpu-nodes]
-a0[01:65]
-b0[01:35]
+a0[01:70]
+b0[01:30]
 
 
 [cpu-nodes]

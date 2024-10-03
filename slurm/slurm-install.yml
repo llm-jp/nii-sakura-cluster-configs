@@ -49,6 +49,9 @@
 
     - name: Ensure package 240719
       include_tasks: system-package-240719.yml 
+    
+    - name: Ensure package 240820
+      include_tasks: system-package-240820.yml
 
     - name: Create Munge Key
       include_tasks: create-mungekey-sub.yml 
