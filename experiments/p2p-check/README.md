@@ -1,10 +1,12 @@
 # LLM-JP Sakura 環境でノード間 GPU Direct 通信が一部の GPU間でしか出来ない問題の再現スクリプト
 
-# 参考
+# NCCLによるp2p test
+
+## 参考
 
 https://drive.google.com/drive/folders/1hv4M0Zalq-3c9QDwxIiCDULkpdWi_iWV?usp=drive_link
 
-# 手順1 (torch環境構築スクリプト)
+## 手順1 (torch環境構築スクリプト)
 
 https://github.com/llm-jp/scripts を clone
 https://github.com/llm-jp/scripts/tree/main/pretrain/installers/v3-megatron-sakura を読みながら
@@ -21,7 +23,7 @@ $ sbatch install.sh TARGET_DIR      # <- インストールしたいディレク
 
 なおapex のコンパイルに時間がかかり, 今回の通信の問題には必要がないので, 多分install.shの # install PyTorch より後は消してしまっても問題なさそう(未確認)
 
-# 手順2 (本レポを clone)
+## 手順2 (本レポを clone)
 
 ```sh
 $ git clone git@github.com:llm-jp/nii-sakura-cluster-configs.git
@@ -33,9 +35,9 @@ TARGET_DIR に nii-sakura-cluster-configs.git/experiments/p2p-check/p2p.{bat.sh,
 cp nii-sakura-cluster-configs/experiments/p2p-check/p2p.{bat.sh,sh,py} TARGET_DIR/
 ```
 
-# 実行
+## 実行
 
-## 準備
+### 準備
 
 `p2p.bat.sh` 冒頭の #SBATCH の行でオプションを適切に設定
 
@@ -49,7 +51,7 @@ cp nii-sakura-cluster-configs/experiments/p2p-check/p2p.{bat.sh,sh,py} TARGET_DI
 #SBATCH --partition=gpu-debug <- gpu-debug もしくは gpu-small
 ```
 
-## ジョブ投入
+### ジョブ投入
 
 ```sh
 $ cd /path/to/TARGET_DIR
@@ -71,6 +73,48 @@ $ sinfo                             # ノードの状態
 
 sinfo でノードの状態を見ると, ジョブが走り終わった後もしばらくノードに * がついた状態になってジョブが始まらないことがあるが数十秒待っていれば解消される.
 
-# 観測されている現象
+以下のスクリプトを利用すると、0~15のGPUの全ての組み合わせに関してテストを実行できる。
+
+```bash
+cp nii-sakura-cluster-configs/experiments/p2p-check/submit_p2p_tests.sh TARGET_DIR/
+cd /path/to/TARGET_DIR/
+./submit_p2p_tests.sh # 一つのペアの実行時間が40秒だとすると、40s * {16*16-16} = 9600s = 2h40mかかる
+```
+
+上で得られたテスト結果は以下のスクリプトで可視化できる。
+```bash
+cd /path/to/p2p-check
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+
+python3 p2p_nccl_matrix.py {TARGET_DIR}
+```
+
+## 観測されている現象
 
 8 GPUs x 2 ノードで, ノード間をまたぐ通信(SENDERとRECEIVERのノードが違うケース, つまり片方が0〜7, もう片方が8〜15)の多くがエラーになる. 8離れているときは成功する. それ以外にも成功するケースがあるが詳細はノードによって違う可能性もあるかも.
+
+# `ping`によるp2p test
+
+## pingテスト
+
+```bash
+./p2p_ping_test.sh {a or b}
+```
+
+`./data/{a or b}_cluster_connectivty.csv`にテスト結果が保存される。
+
+## pythonによる可視化
+
+```bash
+cd /path/to/p2p-check
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+
+python3 p2p_ping_test_heatmap.py
+```
+
+`img/cluster_{a or b}_connectivity_heatmap.png`にヒートマップ画像が保存される。
+青が通信成功、赤が通信失敗を表す。
