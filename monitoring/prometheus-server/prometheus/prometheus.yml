@@ -40,3 +40,13 @@ scrape_configs:
     file_sd_configs:
       - files:
           - /etc/prometheus/pcm-iio-exporter.node.yml
+  - job_name: pcm_pcie_exporter
+    metrics_path: /metrics
+    file_sd_configs:
+      - files:
+          - /etc/prometheus/pcm-pcie-exporter.node.yml
+  - job_name: pcm_memory_exporter
+    metrics_path: /metrics
+    file_sd_configs:
+      - files:
+          - /etc/prometheus/pcm-memory-exporter.node.yml

@@ -7,3 +7,7 @@
   import_playbook: playbooks/install_infiniband_exporter.yml
 - name: Install and Run PCM IIO Exporter
   import_playbook: playbooks/install_pcm_iio_exporter.yml
+- name: Install and Run PCM PCIe Exporter
+  import_playbook: playbooks/install_pcm_pcie_exporter.yml
+- name: Install and Run PCM Memory Exporter
+  import_playbook: playbooks/install_pcm_memory_exporter.yml

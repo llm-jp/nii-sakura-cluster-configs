@@ -7,3 +7,5 @@ utm.inventory
 # * https://github.com/koshieguchi/sakura-exporter
 roles/infiniband_exporter/files/infiniband-exporter
 roles/pcm_iio_exporter/files/pcm-iio-exporter
+roles/pcm_pcie_exporter/files/pcm-pcie-exporter
+roles/pcm_memory_exporter/files/pcm-memory-exporter

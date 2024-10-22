@@ -1,0 +1,58 @@
+---
+- name: Install libasan
+  ansible.builtin.package:
+    name: libasan
+    state: present
+
+- name: Copy pcm-memory-exporter binary to /usr/bin
+  ansible.builtin.copy:
+    src: pcm-memory-exporter
+    dest: /usr/bin/pcm-memory-exporter
+    mode: "0755"
+
+- name: Create directory for opCode files
+  ansible.builtin.file:
+    path: /usr/local/share/pcm
+    state: directory
+    mode: "0755"
+
+- name: Copy opCode files to /usr/local/share/pcm
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /usr/local/share/pcm
+    mode: "0644"
+  loop:
+    - opCode-106.txt
+    - opCode-134.txt
+    - opCode-143-accel.txt
+    - opCode-143.txt
+    - opCode-175.txt
+    - opCode-207.txt
+    - opCode-85.txt
+
+- name: Create systemd service file for pcm-memory-exporter
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/pcm-memory-exporter.service
+    content: |
+      [Unit]
+      Description=PCM Memory Exporter
+      Documentaion=https://github.com/koshieguchi/sakura-exporter
+      After=network.target
+
+      [Service]
+      ExecStart=/usr/bin/pcm-memory-exporter
+      Restart=on-failure
+
+      [Install]
+      WantedBy=multi-user.target
+    mode: "0644"
+
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Enable and start pcm-memory-exporter service
+  ansible.builtin.systemd:
+    name: pcm-memory-exporter
+    enabled: true
+    state: started
