@@ -1,0 +1,58 @@
+---
+- name: Install libasan
+  ansible.builtin.package:
+    name: libasan
+    state: present
+
+- name: Copy pcm-pcie-exporter binary to /usr/bin
+  ansible.builtin.copy:
+    src: pcm-pcie-exporter
+    dest: /usr/bin/pcm-pcie-exporter
+    mode: "0755"
+
+- name: Create directory for opCode files
+  ansible.builtin.file:
+    path: /usr/local/share/pcm
+    state: directory
+    mode: "0755"
+
+- name: Copy opCode files to /usr/local/share/pcm
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /usr/local/share/pcm
+    mode: "0644"
+  loop:
+    - opCode-106.txt
+    - opCode-134.txt
+    - opCode-143-accel.txt
+    - opCode-143.txt
+    - opCode-175.txt
+    - opCode-207.txt
+    - opCode-85.txt
+
+- name: Create systemd service file for pcm-pcie-exporter
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/pcm-pcie-exporter.service
+    content: |
+      [Unit]
+      Description=PCM PCIe Exporter
+      Documentaion=https://github.com/koshieguchi/sakura-exporter
+      After=network.target
+
+      [Service]
+      ExecStart=/usr/bin/pcm-pcie-exporter
+      Restart=on-failure
+
+      [Install]
+      WantedBy=multi-user.target
+    mode: "0644"
+
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Enable and start pcm-pcie-exporter service
+  ansible.builtin.systemd:
+    name: pcm-pcie-exporter
+    enabled: true
+    state: started

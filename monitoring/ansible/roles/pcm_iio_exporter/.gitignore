@@ -1,9 +1,0 @@
-roles/gantsign.golang/*
-ssh.cfg
-utm.inventory
-
-# These files are binaries
-# To get these binaries, refer to the following link:
-# * https://github.com/koshieguchi/sakura-exporter
-roles/infiniband_exporter/files/infiniband-exporter
-roles/pcm_iio_exporter/files/pcm-iio-exporter
