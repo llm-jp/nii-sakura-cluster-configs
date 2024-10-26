@@ -4,5 +4,8 @@ a[001:070]-gw
 [gpu_cluster_b]
 b[001:030]-gw
 
+[localhost]
+localhost ansible_connection=local
+
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3

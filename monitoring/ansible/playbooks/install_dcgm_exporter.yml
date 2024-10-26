@@ -1,6 +1,6 @@
 ---
 - name: Install DCGM Exporter
-  hosts: gpu_cluster_a, gpu_cluster_b
+  hosts: all
   become: true
   become_method: ansible.builtin.sudo
   tasks:
