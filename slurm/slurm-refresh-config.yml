@@ -6,6 +6,9 @@
     slurm_group: slurm
 
   tasks:
+    - name: Redistribute Munge Key
+      include_tasks: redistribute-mungekey-sub.yml  
+
     - name: Distribute configuration files
       include_tasks: distribute-config-files.yml
 
