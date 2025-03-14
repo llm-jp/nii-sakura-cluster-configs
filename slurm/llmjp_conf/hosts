@@ -1,0 +1,70 @@
+# put by ansible template module
+
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts  
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+# Addresses on the Ethernet network
+10.10.96.99	mgmt-nfs-ldap
+10.10.96.100	llm-jp-nvlink
+10.10.96.10	gpu-node0
+10.10.96.11	gpu-node1
+10.10.96.12	gpu-node2
+10.10.96.13	gpu-node3
+10.10.96.14	gpu-node4
+10.10.96.15	gpu-node5
+10.10.96.16	gpu-node6
+10.10.96.17	gpu-node7
+10.10.96.18	gpu-node8
+10.10.96.19	gpu-node9
+10.10.96.20	gpu-node10
+10.10.96.21	gpu-node11
+10.10.96.22	gpu-node12
+10.10.96.23	gpu-node13
+10.10.96.24	gpu-node14
+10.10.96.25	gpu-node15
+
+# Addresses on the RDMA network
+10.138.96.99	mgmt-nfs-ldap-rdma
+10.138.96.100	llm-jp-nvlink-rdma
+
+10.138.96.10	gpu-node0-rdma1
+10.138.96.11	gpu-node1-rdma1
+10.138.96.12	gpu-node2-rdma1
+10.138.96.13	gpu-node3-rdma1
+10.138.96.14	gpu-node4-rdma1
+10.138.96.15	gpu-node5-rdma1
+10.138.96.16	gpu-node6-rdma1
+10.138.96.17	gpu-node7-rdma1
+10.138.96.18	gpu-node8-rdma1
+10.138.96.19	gpu-node9-rdma1
+10.138.96.20	gpu-node10-rdma1
+10.138.96.21	gpu-node11-rdma1
+10.138.96.22	gpu-node12-rdma1
+10.138.96.23	gpu-node13-rdma1
+10.138.96.24	gpu-node14-rdma1
+10.138.96.25	gpu-node15-rdma1
+
+10.138.96.30	gpu-node0-rdma2
+10.138.96.31	gpu-node1-rdma2
+10.138.96.32	gpu-node2-rdma2
+10.138.96.33	gpu-node3-rdma2
+10.138.96.34	gpu-node4-rdma2
+10.138.96.35	gpu-node5-rdma2
+10.138.96.36	gpu-node6-rdma2
+10.138.96.37	gpu-node7-rdma2
+10.138.96.38	gpu-node8-rdma2
+10.138.96.39	gpu-node9-rdma2
+10.138.96.40	gpu-node10-rdma2
+10.138.96.41	gpu-node11-rdma2
+10.138.96.42	gpu-node12-rdma2
+10.138.96.43	gpu-node13-rdma2
+10.138.96.44	gpu-node14-rdma2
+10.138.96.45	gpu-node15-rdma2
+
+# global hostname

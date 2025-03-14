@@ -6,55 +6,34 @@
     slurm_group: slurm
 
   tasks:
-    - name: Ensure the group exists
-      group:
-        name: slurm
-        state: present
-        gid: 500
-
-    - name: Create Slurm User
-      user:
-        name: slurm
-        uid: 500
-        group: slurm
-        shell: /usr/sbin/nologin  # Sets the shell to nologin to prevent direct login
-        create_home: no
-        system: yes  # Set to yes
+    - name: Update the package repository
+      ansible.builtin.apt:
+        update_cache: yes
 
     - name: Ensure required packages are installed (Compute)
-      yum:
+      ansible.builtin.apt:
         name:
-          - epel-release
-          - mariadb-server
-          - mariadb
+          - slurm-wlm
           - munge
-          - munge-libs
-          - munge-devel
-          - slurm
-          - slurm-slurmd
+        state: present
       when: "'master-node' not in inventory_hostname"
     
     - name: Ensure required packages are installed (Control)
-      yum:
+      ansible.builtin.apt:
         name:
-          - epel-release
-          - mariadb-server
-          - mariadb
+          - slurm-wlm
           - munge
-          - munge-libs
-          - munge-devel
-          - slurm
-          - slurm-slurmctld
+        state: present
       when: "'master-node' in inventory_hostname"
 
-    - name: Ensure package 240719
-      include_tasks: system-package-240719.yml 
+    # - name: Ensure package 240719
+    #   include_tasks: system-package-240719.yml 
     
-    - name: Ensure package 240820
-      include_tasks: system-package-240820.yml
+    # - name: Ensure package 240820
+    #   include_tasks: system-package-240820.yml
 
-    - name: Create Munge Key
-      include_tasks: create-mungekey-sub.yml 
+    # - name: Create Munge Key
+    #   include_tasks: create-mungekey-sub.yml 
 
     
     - name: Distribute configuration files

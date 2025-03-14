@@ -1,0 +1,19 @@
+- name: Force gpu-nodes to use cgroupv1
+  hosts: gpu-nodes
+  become: yes
+
+  tasks:
+
+    - name: Backup the remote grub file
+      ansible.builtin.command:
+        cmd: cp /etc/default/grub /etc/default/grub.backup-{{ ansible_date_time.iso8601 }}
+      become: yes
+      # tags: backup-hosts
+
+    - name: Replace a line in /etc/default/grub
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        regexp: '^GRUB_CMDLINE_LINUX_DEFAULT='
+        line: 'GRUB_CMDLINE_LINUX_DEFAULT="autoinstall systemd.unified_cgroup_hierarchy=0"'
+
+

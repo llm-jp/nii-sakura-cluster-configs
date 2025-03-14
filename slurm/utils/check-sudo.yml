@@ -1,0 +1,11 @@
+---
+- name: Test connectivity to all hosts
+  hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: Ping all hosts
+      ping:
+    - name: Print the hostname of each host
+      debug:
+        msg: "The hostname of this machine is {{ ansible_facts['hostname'] }}"

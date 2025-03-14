@@ -1,7 +1,7 @@
 ---    
 - name: Copy Slurm configuration files
   copy:
-    src: "sakura_conf/slurm.conf"
+    src: "llmjp_conf/slurm.conf"
     dest: "/etc/slurm/slurm.conf"
     owner: root
     group: root
@@ -9,7 +9,7 @@
 
 - name: Copy Prolog files
   copy:
-    src: "sakura_conf/prolog.sh"
+    src: "llmjp_conf/prolog.sh"
     dest: "/etc/slurm/prolog.sh"
     owner: slurm
     group: slurm
@@ -17,57 +17,50 @@
 
 - name: Copy Epilog files
   copy:
-    src: "sakura_conf/epilog.sh"
+    src: "llmjp_conf/epilog.sh"
     dest: "/etc/slurm/epilog.sh"
     owner: slurm
     group: slurm
     mode: 755
 
-- name: Copy GPU Monitoring files
-  copy:
-    src: "sakura_conf/nv_gpu_monitor.sh"
-    dest: "/etc/slurm/nv_gpu_monitor.sh"
-    owner: slurm
-    group: slurm
-    mode: 755
+# - name: Copy GPU Monitoring files
+#   copy:
+#     src: "llmjp_conf/nv_gpu_monitor.sh"
+#     dest: "/etc/slurm/nv_gpu_monitor.sh"
+#     owner: slurm
+#     group: slurm
+#     mode: 755
 
-- name: Copy NHC config
-  copy:
-    src: "sakura_conf/nhc.conf"
-    dest: "/etc/nhc/nhc.conf"
-    owner: root
-    group: root
-    mode: 644
+# - name: Copy NHC config
+#   copy:
+#     src: "llmjp_conf/nhc.conf"
+#     dest: "/etc/nhc/nhc.conf"
+#     owner: root
+#     group: root
+#     mode: 644
 
-- name: Copy Reboot program
-  copy:
-    src: "sakura_conf/reboot_program.sh"
-    dest: "/etc/slurm/reboot_program.sh"
-    owner: slurm
-    group: slurm
-    mode: 755
+# - name: Copy Reboot program
+#   copy:
+#     src: "llmjp_conf/reboot_program.sh"
+#     dest: "/etc/slurm/reboot_program.sh"
+#     owner: slurm
+#     group: slurm
+#     mode: 755
 
 - name: Copy Gres files
   copy:
-    src: "sakura_conf/gres.conf"
+    src: "llmjp_conf/gres.conf"
     dest: "/etc/slurm/gres.conf"
     owner: slurm
     group: slurm
     mode: 644
-  when: "'a0' in inventory_hostname"
+  when: "'gpu-node' in inventory_hostname"
+  ignore_errors: yes
 
-- name: Copy Gres files to GPU-small
-  copy:
-    src: "sakura_conf/gres.conf"
-    dest: "/etc/slurm/gres.conf"
-    owner: slurm
-    group: slurm
-    mode: 644
-  when: "'b0' in inventory_hostname"
 
 - name: Copy cgroup configuration files
   copy:
-    src: "sakura_conf/cgroup.conf"
+    src: "llmjp_conf/cgroup.conf"
     dest: "/etc/slurm/cgroup.conf"
 
 - name: Ensure /var/log/slurm is slurm-rw-able 
@@ -76,4 +69,34 @@
     state: directory
     owner: slurm
     group: slurm
+
+- name: Backup the remote /etc/hosts file
+  ansible.builtin.command:
+    cmd: cp /etc/hosts /etc/hosts.backup-{{ ansible_date_time.iso8601 }}
+  become: yes
+  tags: backup-hosts
+
+- name: Refresh hostfile
+  copy:
+    src: "llmjp_conf/hosts"
+    dest: "/etc/hosts"
+    owner: root
+    group: root
+  when: "'gpu-node' in inventory_hostname"
+
+
+- name: Set the hostname temporarily
+  ansible.builtin.command:
+    cmd: hostnamectl set-hostname {{ inventory_hostname }}
+  when: "'gpu-node' in inventory_hostname"
+    
+
+- name: Update /etc/hostname file
+  ansible.builtin.lineinfile:
+    path: /etc/hostname
+    line: "{{ inventory_hostname }}"
+  when: "'gpu-node' in inventory_hostname"
+
+
+
 

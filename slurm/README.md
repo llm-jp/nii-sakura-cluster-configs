@@ -26,8 +26,10 @@ ansible-playbook -i inventory slurm-install.yml
 ```
 ### Update configurations
 There are three scripts to update configurations
+`ansible -i inventory slurm-refresh-config.yml`
 - `slurm-refresh-config.yml`: to update all configurations related to the slurm service
 - `slurm-refresh-munge.yml`: to update munge key
+
 
 
 

@@ -1,10 +1,4 @@
 ---    
-# - name: Create Munge Key
-#   ansible.builtin.command: /usr/sbin/mungekey
-#   args:
-#     creates: /etc/munge/munge.key
-#   when: "'master-node' in inventory_hostname"
-
 - name: Create Munge Key
   command: /usr/sbin/create-munge-key -r -f
   when: "'master-node' in inventory_hostname"

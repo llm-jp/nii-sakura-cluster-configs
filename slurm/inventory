@@ -1,17 +1,7 @@
 [slurm-master]
-master-node ansible_host=login001
-
-[slurm-login-nodes]
-login002
+master-node ansible_host=llm-jp-nvlink
 
 [gpu-nodes]
-a0[01:70]
-b0[01:30]
+gpu-node[0:15]
 
 
-[cpu-nodes]
-c0[01:10]# ansible_host=cpu-node[0:3]
-
-[all:vars]
-ansible_user=llm-jp-admin
-#ansible_ssh_private_key_file=~/.ssh/ed_25519
