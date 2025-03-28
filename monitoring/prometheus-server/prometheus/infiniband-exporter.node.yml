@@ -348,153 +348,153 @@
   labels:
     job: infiniband_exporter
     instance_name: "a070"
-- targets:
-    - "192.168.0.101:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b001"
-- targets:
-    - "192.168.0.102:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b002"
-- targets:
-    - "192.168.0.103:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b003"
-- targets:
-    - "192.168.0.104:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b004"
-- targets:
-    - "192.168.0.105:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b005"
-- targets:
-    - "192.168.0.106:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b006"
-- targets:
-    - "192.168.0.107:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b007"
-- targets:
-    - "192.168.0.108:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b008"
-- targets:
-    - "192.168.0.109:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b009"
-- targets:
-    - "192.168.0.110:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b010"
-- targets:
-    - "192.168.0.111:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b011"
-- targets:
-    - "192.168.0.112:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b012"
-- targets:
-    - "192.168.0.113:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b013"
-- targets:
-    - "192.168.0.114:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b014"
-- targets:
-    - "192.168.0.115:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b015"
-- targets:
-    - "192.168.0.116:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b016"
-- targets:
-    - "192.168.0.117:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b017"
-- targets:
-    - "192.168.0.118:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b018"
-- targets:
-    - "192.168.0.119:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b019"
-- targets:
-    - "192.168.0.120:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b020"
-- targets:
-    - "192.168.0.121:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b021"
-- targets:
-    - "192.168.0.122:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b022"
-- targets:
-    - "192.168.0.123:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b023"
-- targets:
-    - "192.168.0.124:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b024"
-- targets:
-    - "192.168.0.125:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b025"
-- targets:
-    - "192.168.0.126:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b026"
-- targets:
-    - "192.168.0.127:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b027"
-- targets:
-    - "192.168.0.128:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b028"
-- targets:
-    - "192.168.0.129:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b029"
-- targets:
-    - "192.168.0.130:9401"
-  labels:
-    job: infiniband_exporter
-    instance_name: "b030"
+# - targets:
+#     - "192.168.0.101:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b001"
+# - targets:
+#     - "192.168.0.102:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b002"
+# - targets:
+#     - "192.168.0.103:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b003"
+# - targets:
+#     - "192.168.0.104:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b004"
+# - targets:
+#     - "192.168.0.105:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b005"
+# - targets:
+#     - "192.168.0.106:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b006"
+# - targets:
+#     - "192.168.0.107:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b007"
+# - targets:
+#     - "192.168.0.108:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b008"
+# - targets:
+#     - "192.168.0.109:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b009"
+# - targets:
+#     - "192.168.0.110:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b010"
+# - targets:
+#     - "192.168.0.111:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b011"
+# - targets:
+#     - "192.168.0.112:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b012"
+# - targets:
+#     - "192.168.0.113:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b013"
+# - targets:
+#     - "192.168.0.114:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b014"
+# - targets:
+#     - "192.168.0.115:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b015"
+# - targets:
+#     - "192.168.0.116:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b016"
+# - targets:
+#     - "192.168.0.117:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b017"
+# - targets:
+#     - "192.168.0.118:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b018"
+# - targets:
+#     - "192.168.0.119:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b019"
+# - targets:
+#     - "192.168.0.120:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b020"
+# - targets:
+#     - "192.168.0.121:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b021"
+# - targets:
+#     - "192.168.0.122:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b022"
+# - targets:
+#     - "192.168.0.123:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b023"
+# - targets:
+#     - "192.168.0.124:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b024"
+# - targets:
+#     - "192.168.0.125:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b025"
+# - targets:
+#     - "192.168.0.126:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b026"
+# - targets:
+#     - "192.168.0.127:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b027"
+# - targets:
+#     - "192.168.0.128:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b028"
+# - targets:
+#     - "192.168.0.129:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b029"
+# - targets:
+#     - "192.168.0.130:9401"
+#   labels:
+#     job: infiniband_exporter
+#     instance_name: "b030"
